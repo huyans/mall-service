@@ -24,7 +24,6 @@
         <module>mall-order</module>
         <module>mall-member</module>
         <module>mall-ware</module>
-        <module>mall-admin</module>
     </modules>
 
 
