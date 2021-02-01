@@ -5,11 +5,7 @@ import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.yan.mall.coupon.entity.CouponEntity;
 import com.yan.mall.coupon.service.CouponService;
@@ -26,10 +22,17 @@ import com.yan.common.utils.R;
  * @date 2021-01-28 12:19:36
  */
 @RestController
-@RequestMapping("coupon/coupon")
+@RequestMapping("/coupon/coupon")
 public class CouponController {
     @Autowired
     private CouponService couponService;
+
+    @GetMapping("/member/list")
+    public R getCouponsByMemeber() {
+        CouponEntity coupon = new CouponEntity();
+        coupon.setCouponName("满100减10元");
+        return R.ok().put("couponList", Arrays.asList(coupon));
+    }
 
     /**
      * 列表
