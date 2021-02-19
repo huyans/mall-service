@@ -27,6 +27,7 @@
         <module>mall-product</module>
         <module>mall-gateway</module>
 
+        <module>mall-admin</module>
         <module>renren-generator</module>
     </modules>
 

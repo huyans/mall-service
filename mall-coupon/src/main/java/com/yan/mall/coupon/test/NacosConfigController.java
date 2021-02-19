@@ -22,18 +22,10 @@ public class NacosConfigController {
     @Value("${coupon.user.age}")
     private Integer age;
 
-    @Value("${member.user.name}")
-    private String memberUserName;
-    @Value("${member.user.age}")
-    private Integer memberUserAge;
-
     @GetMapping("/config/test/coupon")
     public R testConfig() {
         return R.ok().put("userName", userName).put("age", age);
     }
 
-    @GetMapping("/config/test/member")
-    public R member() {
-        return R.ok().put("userName", memberUserName).put("age", memberUserAge);
-    }
+
 }

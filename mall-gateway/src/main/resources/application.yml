@@ -7,3 +7,21 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
         service: mall-gateway
+    gateway:
+      routes:
+        ## mall-product 商品服务
+        - id: mall-product
+          uri: lb://mall-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /$\{segment} # 路由将 api前缀去除
+
+        ## mall-admin后台服务
+        - id: mall-admin
+          uri: lb://mall-admin
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>/?.*), /mall-admin/$\{segment}
+

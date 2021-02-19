@@ -1,6 +1,7 @@
 package com.yan.mall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -16,11 +17,8 @@ import com.yan.mall.product.service.CategoryService;
 import com.yan.common.utils.PageUtils;
 import com.yan.common.utils.R;
 
-
-
 /**
  * 商品三级分类
- *
  * @author huyan
  * @email xxx
  * @date 2021-01-28 11:02:03
@@ -32,14 +30,12 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
-     * 列表
+     * 树型结构返回列表
      */
-    @RequestMapping("/list")
-    //@RequiresPermissions("product:category:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = categoryService.queryPage(params);
-
-        return R.ok().put("page", page);
+    @RequestMapping("/list/tree")
+    public R listTree(){
+        List<CategoryEntity> categoryTreeList = categoryService.getCategoryTreeList();
+        return R.ok().put("data", categoryTreeList);
     }
 
 
@@ -80,10 +76,8 @@ public class CategoryController {
      * 删除
      */
     @RequestMapping("/delete")
-    //@RequiresPermissions("product:category:delete")
     public R delete(@RequestBody Long[] catIds){
-		categoryService.removeByIds(Arrays.asList(catIds));
-
+		categoryService.batchRemoveByIdList(Arrays.asList(catIds));
         return R.ok();
     }
 
